@@ -1,0 +1,13 @@
+première version simple:
+-créer x cartes (20 pour commencer)
+-1 carte a des points d'attaque ou des points de soin du héros et des pv
+-1 carte piochée et 1 jouée par tour
+-10 cartes par deck
+-début du tour piocher 1 carte supplémentaire ou jouer une carte supplémentaire (par ex)
+-1 monstre peut attaquer l'adversaire ou 1 autre monstre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-1 classe monstre
+-1 classe héros
+-comment gérer un tour? (tous les joueurs et les monstres ressentent un tour)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-Simulations pour équilibrage des cartes?
