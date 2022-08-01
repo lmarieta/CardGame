@@ -1,0 +1,3 @@
+# name health attack maxNbInstance 
+Stegosor 3 3 2
+Tyr 2 4 1
