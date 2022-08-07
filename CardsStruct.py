@@ -6,6 +6,31 @@ class CardsStruct:
         self.cardsDict = cardsDict
         self.nbtotalCards = nbtotalCards
 
+    def add_cards(self, cards):
+            for card in cards:
+                if card.name in self.cardsDict:
+                    self.cardsDict[card.name][1] += 1
+                else:
+                    self.cardsDict[card.name] = [card, 1]
+                self.nbtotalCards += 1
+
+    def rm_cards(self, cards):
+        # remove one card at a time
+        removed_cards = {}
+        for card in cards:
+            if card.name not in self.cardsDict:
+                raise Exception('Trying to remove card not in stack.')
+            if self.cardsDict[card.name][1] > 1:
+                self.cardsDict[card.name][1] -= 1
+            else:
+                del self.cardsDict[card.name]
+            if card.name in removed_cards:
+                removed_cards[card.name][1] += 1
+            else:
+                removed_cards[card.name] = [card, 1]
+            self.nbtotalCards -= 1
+        return removed_cards
+
 class Deck(CardsStruct):
     # Available cards before starting the game
     @classmethod
@@ -34,38 +59,24 @@ class InGameStruct(CardsStruct):
 
 class Hand(InGameStruct):
     # cardsDict = name -> [Card, nbInstance]
-     def add_cards(self, cards):
-            for card in cards:
-                if card.name in self.cardsDict:
-                    self.cardsDict[card.name][1] += 1
-                else:
-                    self.cardsDict[card.name] = [card, 1]
-                self.nbtotalCards += 1
+     pass
 
 class Stack(InGameStruct):
     # Cards to draw
-    def rm_cards(self, cards):
-            for card_name in cards:
-                if card_name not in self.cardsDict:
-                    raise Exception('Trying to remove card not in stack.')
+    pass
 
-                if self.cardsDict[card_name][1] > 1:
-                    self.cardsDict[card_name][1] -= 1
-                else:
-                    del self.cardsDict[card_name]
-                self.nbtotalCards -= 1
+if __name__ == "__main__":
+    deck = Deck.init_from_filePath('C:/Users/lucas/projet_prog/CardGame/cards.txt')
+    dct = deck.cardsDict
+    n = deck.nbtotalCards
+    test = Hand(dct,n)
+    diplodocus = Card.Card('diplodocus', 2, 2)
 
-deck = Deck.init_from_filePath('C:/Users/lucas/projet prog/card game/cards.txt')
-dct = deck.cardsDict
-n = deck.nbtotalCards
-test = Hand(dct,n)
-diplodocus = Card.Card('diplodocus', 2, 2)
+    test.add_cards([diplodocus, diplodocus])
+    # print(test.nbtotalCards)
+    # print(test.cardsDict)
 
-test.add_cards([diplodocus, diplodocus])
-# print(test.nbtotalCards)
-# print(test.cardsDict)
-
-s = Stack(dct,n)
-print(s.cardsDict)
-s.rm_cards(['diplodocus'])
-print(s.cardsDict)
+    s = Stack(dct,n)
+    # print(s.cardsDict)
+    s.rm_cards([diplodocus])
+    # print(s.cardsDict)

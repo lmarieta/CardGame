@@ -1,3 +1,6 @@
 # name health attack maxNbInstance 
 Stegosaure 3 3 2
 Tyrannosaure 2 4 1
+Triceratops 1 1 1
+Ankylosaure 2 3 2
+Velociraptor 1 2 1
