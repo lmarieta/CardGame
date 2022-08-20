@@ -1,8 +1,9 @@
 import Card
 
 class CardsStruct:
-    # Any structure of card
-    def __init__(self, cardsDict, nbtotalCards):
+    # Any structure of card, allow empty structure of cards, such as cards on 
+    # board at beginning of the game
+    def __init__(self, cardsDict={}, nbtotalCards=0):
         self.cardsDict = cardsDict
         self.nbtotalCards = nbtotalCards
 
@@ -15,7 +16,6 @@ class CardsStruct:
                 self.nbtotalCards += 1
 
     def rm_cards(self, cards):
-        # remove one card at a time
         removed_cards = {}
         for card in cards:
             if card.name not in self.cardsDict:
@@ -80,3 +80,7 @@ if __name__ == "__main__":
     # print(s.cardsDict)
     s.rm_cards([diplodocus])
     # print(s.cardsDict)
+    test = Hand()
+    test.add_cards([diplodocus, diplodocus])
+    print(test.nbtotalCards)
+    print(test.cardsDict)

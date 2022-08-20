@@ -11,9 +11,9 @@ class Player:
             self.hand = Hand(self.draw(nbHand,self.deck),nbHand)
             # stack is the pile of cards you draw
             self.stack = Stack(self.deck.cardsDict,self.deck.nbtotalCards)
+            self.deck = None
 
     def draw(self, nbCards, cardsStruct):
-        # you draw from cardsStruct
         # you cannot draw more cards than your stack contains
         if nbCards > cardsStruct.nbtotalCards:
             nbCards = cardsStruct.nbtotalCards
@@ -47,15 +47,7 @@ class Player:
 
 if __name__ == "__main__":
     deck = Deck.init_from_filePath('C:/Users/lucas/projet_prog/CardGame/cards.txt')
-    print("deck : ")
-    print(deck.cardsDict)
-    p1 = Player(deck=deck,nbHand=2)
-    print("deck : ")
+    p1 = Player(deck,1,2)
     print(p1.deck.cardsDict)
-    p1.draw(2,p1.stack)
-    print("stack : ")
-    print(p1.stack.cardsDict)
-    print("hand : ")
-    print(p1.hand.cardsDict)
-    print("deck : ")
-    print(p1.deck.cardsDict)
+    p1.draw(2,p1.deck)
+    # print(p1.deck.cardsDict)
