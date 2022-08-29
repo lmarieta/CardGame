@@ -43,7 +43,6 @@ class Player:
         # transfer card from hand to cards on board
         self.hand.rm_cards(names)
         self.cardsonboard.add_cards(names)
-        pass
 
 if __name__ == "__main__":
     deck = Deck.init_from_filePath('C:/Users/lucas/projet_prog/CardGame/cards.txt')
