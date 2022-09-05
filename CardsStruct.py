@@ -1,3 +1,4 @@
+from array import array
 import Card
 
 class CardsStruct:
@@ -7,7 +8,7 @@ class CardsStruct:
         self.cardsDict = cardsDict
         self.nbtotalCards = nbtotalCards
 
-    def add_cards(self, cards):
+    def add_cards(self, cards: array):
             for card in cards:
                 if card.name in self.cardsDict:
                     self.cardsDict[card.name][1] += 1
@@ -15,7 +16,7 @@ class CardsStruct:
                     self.cardsDict[card.name] = [card, 1]
                 self.nbtotalCards += 1
 
-    def rm_cards(self, cards):
+    def rm_cards(self, cards: array):
         removed_cards = {}
         for card in cards:
             if card.name not in self.cardsDict:

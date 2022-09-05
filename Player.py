@@ -1,18 +1,26 @@
 from CardsStruct import CardsStruct, Deck, Hand, Stack
+from array import array
+import Card
 import numpy as np
 
 class Player: 
     # constructor  
-    def __init__(self, deck, cardsonboard=CardsStruct(), nbHand=0):
+    def __init__(self, deck: CardsStruct(), cardsonboard=CardsStruct(), nbHand=0, hand=Hand()):
         # deck is the cards you have before starting the game 
+        # better to have two constructors?
         self.deck = deck
         self.cardsonboard = cardsonboard
-        if nbHand != 0:
-            self.hand = Hand(self.draw(nbHand,self.deck),nbHand)
-            # stack is the pile of cards you draw
-            self.stack = Stack(self.deck.cardsDict,self.deck.nbtotalCards)
+        if hand!=Hand():
+            self.hand = hand
+        else:
+            if nbHand != 0:
+                self.hand = Hand(self.draw(nbHand,self.deck),nbHand)
+                # stack is the pile of cards you draw
+                self.stack = Stack(self.deck.cardsDict,self.deck.nbtotalCards)
+            else:
+                self.hand = Hand()
 
-    def draw(self, nbCards, cardsStruct):
+    def draw(self, nbCards: int, cardsStruct:CardsStruct()):
         # you draw from cardsStruct
         # you cannot draw more cards than your stack contains
         if nbCards > cardsStruct.nbtotalCards:
@@ -39,22 +47,24 @@ class Player:
         # return removed cards so that you can add them to your hand for example
         return removed_cards
 
-    def playCards(self, names):
+    def play_cards(self, names: array):
         # transfer card from hand to cards on board
+        # exemple: 
+        # diplodocus = Card.Card('diplodocus', 2, 2)
+        # self.play_cards([diplodocus, diplodocus])
+        # is it sufficient to check in rm_cards for non existing cards in hand?
         self.hand.rm_cards(names)
         self.cardsonboard.add_cards(names)
 
+    def attack(self,attacker,defender):
+        defender.change_hp(attacker.attack)
+
 if __name__ == "__main__":
     deck = Deck.init_from_filePath('C:/Users/lucas/projet_prog/CardGame/cards.txt')
-    print("deck : ")
-    print(deck.cardsDict)
-    p1 = Player(deck=deck,nbHand=2)
-    print("deck : ")
-    print(p1.deck.cardsDict)
-    p1.draw(2,p1.stack)
-    print("stack : ")
-    print(p1.stack.cardsDict)
-    print("hand : ")
-    print(p1.hand.cardsDict)
-    print("deck : ")
-    print(p1.deck.cardsDict)
+    hand = Hand(deck.cardsDict['Stegosaure'],1)  
+    p1 = Player(deck=deck,hand=hand)
+    p2 = Player(deck=deck,nbHand=2)
+    stego = Card.Card('Stegosaure', 3, 3)
+    p1.play_cards([stego])
+    print("cards on board : ")
+    print(p1.cardsonboard.cardsDict)
