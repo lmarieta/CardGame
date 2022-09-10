@@ -61,7 +61,8 @@ class Player:
 
 if __name__ == "__main__":
     deck = Deck.init_from_filePath('C:/Users/lucas/projet_prog/CardGame/cards.txt')
-    hand = Hand(deck.cardsDict['Stegosaure'],1)  
+    card_in_hand = dict(Stegosaure=deck.cardsDict['Stegosaure'])
+    hand = Hand(card_in_hand,1)
     p1 = Player(deck=deck,hand=hand)
     p2 = Player(deck=deck,nbHand=2)
     stego = Card.Card('Stegosaure', 3, 3)
