@@ -9,7 +9,7 @@ class CardsStruct:
         self.nbtotalCards = nbtotalCards
 
     def add_cards(self, cards: array):
-        # exemple: 
+        # example: 
         # diplodocus = Card.Card('diplodocus', 2, 2)
         # self.add_cards([diplodocus, diplodocus])
             for card in cards:
@@ -20,13 +20,11 @@ class CardsStruct:
                 self.nbtotalCards += 1
 
     def rm_cards(self, cards: array):
-        # exemple: 
+        # example: 
         # diplodocus = Card.Card('diplodocus', 2, 2)
         # self.rm_cards([diplodocus, diplodocus])
         removed_cards = {}
         for card in cards:
-            print('here')
-            print(self.cardsDict)
             if card.name not in self.cardsDict:
                 raise Exception('Trying to remove card not in stack.')
             if self.cardsDict[card.name][1] > 1:
@@ -68,6 +66,8 @@ class InGameStruct(CardsStruct):
 
 class Hand(InGameStruct):
     # cardsDict = name -> [Card, nbInstance]
+    # card = dict(Stegosaure=deck.cardsDict['Stegosaure'])
+    # hand = Hand(card,1)
      pass
 
 class Stack(InGameStruct):
